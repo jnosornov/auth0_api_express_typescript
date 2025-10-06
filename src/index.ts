@@ -6,6 +6,7 @@ import nocache from "nocache";
 import { messagesRouter } from "./messages/messages.router";
 import { errorHandler } from "./middleware/error.middleware";
 import { notFoundHandler } from "./middleware/not-found.middleware";
+import { debugLogger } from "./middleware/debug-logger.middleware";
 
 dotenv.config();
 
@@ -56,6 +57,8 @@ app.use(
     maxAge: 86400,
   })
 );
+
+app.use(debugLogger);
 
 app.use("/api", apiRouter);
 apiRouter.use("/messages", messagesRouter);
